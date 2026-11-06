@@ -46,14 +46,10 @@
     });
   });
 
-  // Carrusel de sabores en celular: puntitos que siguen al dedo
-  var car = d.getElementById('sabores'), pista = d.getElementById('saboresPista');
-  if (car && pista) {
-    car.addEventListener('scroll', function () {
-      var t = car.querySelector('.sabor'); if (!t) return;
-      var i = Math.round(car.scrollLeft / (t.offsetWidth + 16));
-      pista.querySelectorAll('i').forEach(function (p, j) { p.classList.toggle('on', j === i); });
-    }, { passive: true });
+  // QR del menú digital (en computadora: para abrirlo en el celular)
+  var qr = d.getElementById('qrMenu');
+  if (qr && window.qrcode && getComputedStyle(qr.parentNode).display !== 'none') {
+    try { var q = window.qrcode(0, 'M'); q.addData(qr.getAttribute('data-url')); q.make(); qr.innerHTML = q.createSvgTag({ cellSize: 6, margin: 0, scalable: true }); } catch (_) {}
   }
 
   // Mapa de Google: solo si el visitante lo pide (no carga nada de terceros antes)
@@ -93,7 +89,7 @@
           if (e.isIntersecting) { e.target.classList.remove('oculto'); obs.unobserve(e.target); }
         });
       }, { rootMargin: '0px 0px -8% 0px' });
-      d.querySelectorAll('.seccion-cab, .sabor, .mitad, .pizarron, .nosotros-txt, .promesa, .visita-datos, .mapa, .redes > *, .foto, .cat').forEach(function (el, i) {
+      d.querySelectorAll('.seccion-cab, .sabor, .mitad, .nosotros-txt, .promesa, .visita-datos, .mapa, .redes > *, .foto, .abrir-menu').forEach(function (el, i) {
         el.classList.add('revelar');
         if (el.getBoundingClientRect().top > window.innerHeight) {
           el.classList.add('oculto');

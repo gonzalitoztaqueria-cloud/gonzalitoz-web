@@ -170,31 +170,18 @@ p { margin: 0; }
          border-radius: 999px; box-shadow: var(--sombra-chica); width: fit-content; max-width: 100%; }
 .mitad img { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--negro); background: var(--blanco); flex: none; }
 
-/* menú: secciones desplegables con tarjetas de foto (como el menú digital) */
-.carta { display: flex; flex-direction: column; gap: 16px; }
-.cat { background: var(--blanco); color: var(--negro); border: var(--contorno); border-radius: 22px; box-shadow: 7px 7px 0 var(--verde-noche); overflow: hidden; }
-.cat > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 18px 22px; }
-.cat > summary::-webkit-details-marker { display: none; }
-.cat-n { font: 400 clamp(1.9rem, 4vw, 2.6rem)/1 var(--f-titulo); color: var(--verde); }
-.cat-desde { margin-left: auto; font-weight: 700; color: var(--tinta-suave); font-size: .9rem; white-space: nowrap; }
-.cat-desde b { color: var(--rojo); font: 400 1.5rem/1 var(--f-titulo); }
-.cat-flecha { width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--negro); background: var(--dorado); position: relative; transition: transform .3s ease; }
-.cat-flecha::before { content: ""; position: absolute; left: 50%; top: 44%; width: 10px; height: 10px; border-right: 3px solid var(--negro); border-bottom: 3px solid var(--negro); transform: translate(-50%, -50%) rotate(45deg); }
-.cat[open] .cat-flecha { transform: rotate(180deg); }
-.cat[open] > summary { border-bottom: 2px dashed var(--crema); }
-.cat-platos { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; padding: 20px 22px 24px; }
-@media (prefers-reduced-motion: no-preference) { .cat[open] .cat-platos { animation: aparecer .4s ease both; } }
-.plato { display: flex; flex-direction: column; border: 2px solid var(--negro); border-radius: 16px; overflow: hidden; background: var(--blanco); min-width: 0; }
-.plato-foto { position: relative; aspect-ratio: 4 / 5; background: var(--crema); border-bottom: 2px solid var(--negro); display: grid; place-items: center; }
-.plato-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.plato-foto img.sin-foto { position: static; width: 80px; height: 80px; opacity: .8; }
-.plato-precio { position: absolute; right: 10px; bottom: 10px; background: var(--rojo); color: var(--blanco); border: 2px solid var(--negro); border-radius: 12px;
-                padding: 6px 10px 4px; font: 400 1.7rem/1 var(--f-titulo); transform: rotate(-4deg); box-shadow: 3px 3px 0 var(--negro); font-variant-numeric: tabular-nums; }
-.plato-cuerpo { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px 14px; }
-.plato h4 { margin: 0; font: 400 1.5rem/1 var(--f-titulo); }
-.plato p { font-size: .88rem; line-height: 1.4; color: var(--tinta-suave); }
-.plato-2 { font-size: .82rem; font-weight: 700; margin-top: 2px; }
-.plato-2 b { color: var(--rojo); }
+/* menú: abre el menú digital (gonzalitoz.online/menu/) */
+.abrir-menu { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; background: var(--blanco); color: var(--negro);
+              border: var(--contorno); border-radius: 26px; box-shadow: 9px 9px 0 var(--verde-noche); padding: clamp(26px, 4vw, 44px); }
+.abrir-menu-txt { display: flex; flex-direction: column; gap: 14px; min-width: 0; max-width: 52ch; }
+.abrir-menu-t { font: 400 clamp(2.2rem, 5vw, 3.2rem)/1 var(--f-titulo); color: var(--verde); }
+.abrir-menu-nota { font-size: .85rem; color: var(--tinta-suave); }
+.btn-grande { min-height: 60px; padding: 14px 34px; font-size: 1.15rem; }
+.abrir-menu-qr { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; font-size: .85rem; font-weight: 700; max-width: 190px; }
+.qr { width: 170px; height: 170px; padding: 10px; background: var(--blanco); border: var(--contorno); border-radius: 16px; box-shadow: var(--sombra-chica); }
+.qr svg { width: 100%; height: 100%; display: block; }
+.abrir-menu-taquero { position: absolute; right: 210px; top: -46px; width: 96px; height: 96px; border-radius: 50%; border: 3px solid var(--negro); box-shadow: var(--sombra-chica); }
+@media (prefers-reduced-motion: no-preference) { .abrir-menu-taquero { animation: menear 3.4s ease-in-out infinite; } }
 
 /* nosotros */
 .nosotros { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
@@ -290,17 +277,22 @@ p { margin: 0; }
   .barra-nav.abierto a:nth-child(3) { animation-delay: .05s; } .barra-nav.abierto a:nth-child(4) { animation-delay: .1s; }
   .barra-nav.abierto a:nth-child(5) { animation-delay: .15s; } .barra-nav.abierto a:nth-child(6) { animation-delay: .2s; }
 }
+@media (max-width: 640px) {
+  .sabores { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .sabor:not(.sabor-movil) { display: none; }
+  .sabor h3 { font-size: 1.6rem; }
+  .sabor p { font-size: .82rem; }
+  .sabor-cuerpo { padding: 12px 12px 14px; }
+  .precio { font-size: .78rem; padding: 3px 8px; }
+  .abrir-menu { grid-template-columns: 1fr; }
+  .abrir-menu-qr, .abrir-menu-taquero { display: none; }
+}
 @media (max-width: 480px) {
   .galeria { grid-auto-rows: 170px; gap: 12px; }
   .foto-grande { grid-row: span 2; }
   .barra-logo img { width: 128px; }
   .portada-arte { min-height: 360px; }
   .globo { font-size: 1.35rem; }
-  .cat-platos { grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px; }
-  .cat > summary { padding: 14px 16px; gap: 10px; }
-  .plato h4 { font-size: 1.2rem; }
-  .plato p { display: none; }
-  .plato-precio { font-size: 1.35rem; }
   .mitad, .resena { border-radius: 22px; }
   .btn { width: 100%; }
   .acciones { width: 100%; }
